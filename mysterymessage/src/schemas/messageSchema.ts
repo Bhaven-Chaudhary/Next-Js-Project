@@ -5,6 +5,6 @@ import {z} from "zod";
 export const messageSchema = z.object({
     content: z
     .string()
-    .min(6, "Message must be minimum 6 characters long")
-    .max(300, "Message must not be longer than 300 characters")
+    .min(6, {message:"Message must be minimum 6 characters long"})
+    .max(300, {message:"Message must not be longer than 300 characters"})
 })
