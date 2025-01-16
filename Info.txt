@@ -1,2 +1,6 @@
 https://youtu.be/OgS1ZWZItno?si=Q6JMZaf6uokxo3l9
 Full Stack next js app
+
+1) Using "Zod" for field authorization
+2) Using "mongoose" to connect to database
+3) Using "Resend" to connect and use email servise for our application
