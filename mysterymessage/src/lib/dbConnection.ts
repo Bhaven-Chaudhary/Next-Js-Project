@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { deflate } from "zlib";
 
 // Creating type for connection object to add type safety for connection response received from database
 type ConnectionObject = {
