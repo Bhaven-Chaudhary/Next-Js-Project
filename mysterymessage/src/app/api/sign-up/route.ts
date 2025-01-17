@@ -35,7 +35,22 @@ export async function POST(request: Request){
 
         if(existingUserByEmail){
             //If user is present by email
-            // TODO
+
+            //Checking if present user is verified
+            if(existingUserByEmail.isVerified){
+                return Response.json({
+                    success: false,
+                    message: "Verified user is already present with this email"
+                }, {status: 400})
+            }else {
+                //If user exist but not verified, saving user with updated password and opt(i.e verify code)
+                const hashedPassword = await bcrypt.hash(password, 10);
+                existingUserByEmail.password = hashedPassword;
+                existingUserByEmail.verifyCode = verifyCode;
+                existingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 3600000);
+                await existingUserByEmail.save();
+            }
+
         }else{
 
             //Here user does not exit, creating new user and saving to database
@@ -62,6 +77,22 @@ export async function POST(request: Request){
             await newUser.save();
 
         }
+
+        //sending verification email
+        const  emailResponse = await sendVerificationEmail(email, username, verifyCode);
+
+        if(!emailResponse.success){
+            return Response.json({
+                success: false,
+                message: emailResponse.message
+            }, {status: 500})
+        }
+
+        //If sending email is success
+        return Response.json({
+            success: true,
+            message: "User registered successfully, please verify your email"
+        }, {status: 200})
         
     } catch (error) {
         console.log("Error registering user", error)
