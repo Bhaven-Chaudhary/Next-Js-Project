@@ -22,7 +22,7 @@ const MessageSchema: Schema<Message> = new Schema({
 
 //The User interface ensures type safety and autocomplete features for TypeScript
 export interface User extends Document{
-    userName: string,
+    username: string,
     email: string,
     password: string,
     verifyCode: string,
@@ -34,7 +34,7 @@ export interface User extends Document{
 
 //Schema Definition: The userSchema defines the structure, validation, and default values for a "User" document in MongoDB.
 const UserSchema: Schema<User> = new Schema({
-    userName:{
+    username:{
         type: String,
         required: [true, "Username is required"],
         trim:true,
