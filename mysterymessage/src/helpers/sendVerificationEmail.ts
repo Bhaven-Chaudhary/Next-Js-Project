@@ -5,7 +5,7 @@ import VerificationEmail from "../../emails/VerificationEmail";
 import { ApiResponse } from "@/types/ApiResponseTypes";
 
 //Function to send email
-export async function verificationEmail(
+export async function sendVerificationEmail(
     email:string, 
     username: string, 
     verifyCode: string
