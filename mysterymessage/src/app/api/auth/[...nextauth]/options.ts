@@ -1,7 +1,6 @@
 import dbConnect from "@/lib/dbConnection";
 import UserModel from "@/model/User";
 import { NextAuthOptions } from "next-auth";
-import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcrypt"
 
@@ -55,7 +54,22 @@ export const authOptions: NextAuthOptions = {
             }
 
         },
-    })]
+    })],
+    callbacks:{
+        async jwt({ token, user }) {
+            return token
+        },
+        async session({ session, token }) {
+            return session
+        },
+        
+    },
+    pages:{
+        signIn: "/signIn"
+    },
+    session:{
+        strategy: "jwt"
+    },
+    secret: process.env.NEXTAUTH_SECRET,
+
 }
-
-
