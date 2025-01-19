@@ -48,7 +48,6 @@ export const authOptions: NextAuthOptions = {
 
                 }
 
-                
             } catch (err: any) {
                 throw new Error(err);
             }
@@ -57,9 +56,26 @@ export const authOptions: NextAuthOptions = {
     })],
     callbacks:{
         async jwt({ token, user }) {
+
+            if(user){
+                
+                // Adding user data in token to make it available where token is present 
+                token._id = user._id;
+                token.isVerified = user.isVerified;
+                token.isAcceptingMessage = user.isAcceptingMessage;
+                token.username = user.username
+            }
             return token
         },
         async session({ session, token }) {
+
+            // Adding user data in session to make it available where session is present 
+            if (token) {
+                session.user._id = token._id;
+                session.user.isVerified = token.isVerified;
+                session.user.isAcceptingMessage = token.isAcceptingMessage;
+                session.user.username = token.username
+            }
             return session
         },
         
