@@ -5,7 +5,7 @@ export const userNameValidation = z
     .string()
     .min(2,'User name should be at least 2 character')
     .max(20,'User name should be max 20 character')
-    .regex(/^[a-bA-B0-9]+$/, "User name should not contain special character")
+    .regex(/^[a-zA-Z0-9]+$/, "User name should not contain special character")
 
 
 // Creating typescript schema using zod to validate sign up details
