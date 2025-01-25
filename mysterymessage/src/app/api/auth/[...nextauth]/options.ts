@@ -60,7 +60,7 @@ export const authOptions: NextAuthOptions = {
             if(user){
                 
                 // Adding user data in token to make it available where token is present 
-                token._id = user._id;
+                token._id = user._id?.toString(); // Convert ObjectId to string
                 token.isVerified = user.isVerified;
                 token.isAcceptingMessage = user.isAcceptingMessage;
                 token.username = user.username
