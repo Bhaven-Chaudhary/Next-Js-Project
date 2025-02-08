@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^1.1.9",
     "@react-email/components": "^0.0.32",
+    "ai": "^4.1.25",
     "bcrypt": "^5.1.1",
     "mongoose": "^8.9.4",
+    "mysterymessage": "file:",
     "next": "15.1.4",
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
