@@ -10,7 +10,7 @@ export const userNameValidation = z
 
 // Creating typescript schema using zod to validate sign up details
 export const singUpSchema = z.object({
-    userName: userNameValidation,
+    username: userNameValidation,
     email: z.string().email({message: "Invalid email address"}),
     password: z.string().min(6,{message: "Password must be minimum 6 characters"})
 })
