@@ -47,10 +47,10 @@ function SignIn() {
         password: data.password,
       });
 
-      if (result?.error) {
+      if (!result?.ok) {
         toast({
           title: "Error",
-          description: "Login Failed",
+          description: result?.error || "Login Failed",
         });
       }
 
