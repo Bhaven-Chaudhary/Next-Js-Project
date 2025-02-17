@@ -55,7 +55,7 @@ function SignIn() {
       }
 
       if (result?.url) {
-        router.replace('/dashboard');
+        router.replace("/dashboard");
       }
     } catch (error) {
       console.log("Error in sign up of user", error);
