@@ -60,7 +60,7 @@ function SignIn() {
     } catch (error) {
       console.log("Error in sign up of user", error);
       toast({
-        title: "Sign Up failed",
+        title: "Sign In failed",
         description: "Error in sign up of user",
       });
     } finally {
