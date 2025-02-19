@@ -37,7 +37,7 @@ export default function MessageCard({
   const { toast } = useToast();
   // Function to delete message using message id
   async function handelDeleteConfirm() {
-    const response = await fetch(`api/delete-message/${message._id}`, {
+    const response = await fetch(`/api/delete-message/${message._id}`, {
       method: "DELETE",
     });
 
