@@ -11,7 +11,6 @@ import { Loader2, RefreshCcw } from "lucide-react";
 import { useSession } from "next-auth/react";
 import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useWindowSize } from "usehooks-ts";
 import * as z from "zod";
 
 export default function Dashboard() {
@@ -65,38 +64,35 @@ export default function Dashboard() {
   }, [setValue, toast]);
 
   //method to fetch all the available messages
-  const fetchMessages = useCallback(
-    async (refresh: boolean = false) => {
-      setIsLoading(true);
-      try {
-        const response = await fetch("/api/get-messages");
-        const responseData = await response.json();
+  const fetchMessages = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("/api/get-messages");
+      const responseData = await response.json();
 
-        if (responseData.success) {
-          toast({
-            title: "Success",
-            description: responseData.message,
-          });
-          setMessage(responseData.message || []);
-        } else {
-          toast({
-            variant: "destructive",
-            title: "Error",
-            description: responseData.message,
-          });
-        }
-      } catch (error) {
+      if (responseData.messages) {
+        toast({
+          title: "Success",
+          description: "Fetched latest messages",
+        });
+        setMessages(responseData.messages || []);
+      } else {
         toast({
           variant: "destructive",
           title: "Error",
-          description: error.message || "Unable to get user messages",
+          description: responseData.message || "Unable to fetch user messages",
         });
-      } finally {
-        setIsLoading(false);
       }
-    },
-    [toast]
-  );
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: error.message || "Unable to get user messages",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }, [toast]);
 
   useEffect(() => {
     if (!session || !session?.user) return;
@@ -191,7 +187,7 @@ export default function Dashboard() {
         variant="outline"
         onClick={(e) => {
           e.preventDefault();
-          fetchMessages(true);
+          fetchMessages();
         }}
       >
         {isLoading ? (
