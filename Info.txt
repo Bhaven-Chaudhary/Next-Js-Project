@@ -1,6 +1,10 @@
 https://youtu.be/OgS1ZWZItno?si=Q6JMZaf6uokxo3l9
+
+https://github.com/hiteshchoudhary/ama-app/blob/main/src/app/(auth)/sign-up/page.tsx
 Full Stack next js app
 
 1) Using "Zod" for field authorization
 2) Using "mongoose" to connect to database
 3) Using "Resend" to connect and use email servise for our application
+
+
